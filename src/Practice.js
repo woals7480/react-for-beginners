@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
 
 // To Do List
 // function App(){
@@ -30,33 +30,43 @@ import { useEffect, useState } from "react"
 //     )
 // }
 
-
 //Coin Tracker
-function App(){
-    const [loading, setLoading] = useState(true)
-    const [coins, setCoins] = useState([])
-    useEffect(()=>{
-        fetch("https://api.coinpaprika.com/v1/tickers")
-        .then((response)=> response.json())
-        .then((json)=>
-            {
-            setCoins(json)
-            setLoading(false)
-            })
-    },[])
-    return(
-        <div>
-            <h1>The Coins!{loading ? "" : `(${coins.length})`}</h1>
-            {loading ? <strong>Loading...</strong> : <select>
-                {coins.map((coin)=> 
-                    <option>{coin.name}({coin.symbol}) : ${coin.quotes.USD.price}(USD)</option>
-                )}
-            </select>}
-            
-        </div>
-    )
+// function App(){
+//     const [loading, setLoading] = useState(true)
+//     const [coins, setCoins] = useState([])
+//     useEffect(()=>{
+//         fetch("https://api.coinpaprika.com/v1/tickers")
+//         .then((response)=> response.json())
+//         .then((json)=>
+//             {
+//             setCoins(json)
+//             setLoading(false)
+//             })
+//     },[])
+//     return(
+//         <div>
+//             <h1>The Coins!{loading ? "" : `(${coins.length})`}</h1>
+//             {loading ? <strong>Loading...</strong> : <select>
+//                 {coins.map((coin)=>
+//                     <option>{coin.name}({coin.symbol}) : ${coin.quotes.USD.price}(USD)</option>
+//                 )}
+//             </select>}
+
+//         </div>
+//     )
+// }
+
+//Movie App
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/movie" element={<Detail />}></Route>
+        <Route path="/" element={<Home />}></Route>
+      </Routes>
+    </Router>
+  );
 }
 
-
-
-export default App
+export default App;
